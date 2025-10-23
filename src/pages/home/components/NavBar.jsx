@@ -48,6 +48,8 @@ const NavBar = ({ auth, img, username, email }) => {
                         <NavLink to="/pricing" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Pricing</NavLink>
                         <NavLink to="/mentors" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Mentors</NavLink>
                         <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Contact us</NavLink>
+                        {auth ? <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Dashboard</NavLink>
+                            : ''}
                     </div>
                     <div className="">
                         {
@@ -76,10 +78,13 @@ const NavBar = ({ auth, img, username, email }) => {
                                         </svg>
                                     </div>
                                     <div
-                                        className={`sub-menu absolute top-14 right-0 bg-white  rounded-md shadow-md w-48 transition-all duration-300 ${showSubMenu ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-0 scale-y-0 -translate-y-2 pointer-events-none'}`}
+                                        className={`sub-menu absolute  top-14 right-0 bg-white  rounded-md shadow-md w-48 transition-all duration-300 ${showSubMenu ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-0 scale-y-0 -translate-y-2 pointer-events-none'}`}
                                     >
-                                        <p className="text-text font-semibold">{username}</p>
-                                        <p className="text-text text-sm text-gray-500">{email}</p>
+                                        <div className="px-2 text-center">
+
+                                            <p className="text-text font-semibold">{username}</p>
+                                            <p className="text-text text-sm text-gray-500">{email}</p>
+                                        </div>
                                         <hr className="my-2" />
                                         <ul className=" mt-2">
                                             <li className="hover:bg-gray-100 p-2 rounded-md transition-colors cursor-pointer flex items-center">
@@ -98,7 +103,7 @@ const NavBar = ({ auth, img, username, email }) => {
                                     </div>
                                 </div>
                                 : findLocation() ? '' :
-                                    <NavLink className="hidden md:block text-white px-3 py-2 rounded-lg bg-primary cursor-pointer hover:opacity-80" to="/sign_up">Get Started</NavLink>
+                                    <NavLink className="hidden md:block text-white px-3 py-2 rounded-lg bg-primary opacity-80 cursor-pointer hover:opacity-100" to="/sign_in">Get Started</NavLink>
 
 
                         }

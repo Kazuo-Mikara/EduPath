@@ -1,18 +1,28 @@
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer"
 import usersData from "../../../data/users.json"
-
+import  {useAuth} from "../../utils/AuthContext"
 import { NavLink } from 'react-router-dom'
 const Home = () => {
-    const [Auth, SetAuth] = useState(false);
+    const [Auth, SetAuth] = useState(null);
+    const { user } = useAuth();
+    useEffect(() => {
+        if (user) {
+            SetAuth(user)
+            console.log(user.email)
+        }
+        else {
+            SetAuth(user)
+        }
+    }, [user])
     return (
         <>
             <div className="bg-gray-50">
                 <div className="w-full mx-auto bg-white shadow-lg rounded-lg ">
-                    <NavBar auth={Auth} username={usersData.users[0].name} email={usersData.users[0].email} img={usersData.users[0].img} />
+                    <NavBar auth={Auth} username={user?.name} email={user?.email} img={user?.img || usersData.users[0].img} />
 
                     <main className="p-6 md:p-12">
                         <section className="text-center py-12 md:py-20">
