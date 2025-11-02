@@ -1,6 +1,7 @@
 import React from 'react'
 import Home from '../pages/home/Home';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Courses from '../pages/home/Courses'
 import Pricing from '../pages/home/Pricing';
 import SignIn from '../pages/home/SignIn'
 import SignUp from '../pages/home/SignUp'
@@ -16,13 +17,27 @@ import Calendar from '../pages/client/Calendar';
 import DashboardHome from '../pages/client/Home/DashboardHome'
 import { AuthProvider } from '../utils/AuthContext';
 import ViewCourses from '../pages/client/Courses/View_Courses';
-
+import CourseDetail from '../pages/home/CourseDetail'
 const router = createBrowserRouter([
   // Public website pages
   {
     path: '/',
     element: <Home />,
     errorElement: <HomeErrorPage />,
+  },
+  {
+    // Courses section with nested routes
+    path: 'courses',
+    children: [
+      {
+        index: true,
+        element: <Courses />,
+      },
+      {
+        path: 'course_detail/:id',
+        element: <CourseDetail />
+      }
+    ]
   },
   {
     path: '/pricing',

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer"
 import usersData from "../../../data/users.json"
-import  {useAuth} from "../../utils/AuthContext"
+import { useAuth } from "../../utils/AuthContext"
 import { NavLink } from 'react-router-dom'
 const Home = () => {
     const [Auth, SetAuth] = useState(null);
@@ -20,9 +20,9 @@ const Home = () => {
     }, [user])
     return (
         <>
-            <div className="bg-gray-50">
+            <div className="z-0 bg-gray-50">
                 <div className="w-full mx-auto bg-white shadow-lg rounded-lg ">
-                    <NavBar auth={Auth} username={user?.name} email={user?.email} img={user?.img || usersData.users[0].img} />
+                    <NavBar />
 
                     <main className="p-6 md:p-12">
                         <section className="text-center py-12 md:py-20">

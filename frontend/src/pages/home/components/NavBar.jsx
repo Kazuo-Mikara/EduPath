@@ -1,14 +1,26 @@
 import React, { useState, useEffect, useRef } from "react";
 import logo from "../../../assets/Logo.png";
 import "./NavBar.css"
+import img from '../../../assets/student_image.png'
 import SignIn from "../SignIn1"
 import { NavLink } from "react-router-dom";
 import { FiArrowRight, FiChevronRight } from "react-icons/fi";
-const NavBar = ({ auth, img, username, email }) => {
+import { useAuth } from "../../../utils/AuthContext"
+import { useNavigate } from "react-router";
+const NavBar = () => {
+    const { user, logoutUser } = useAuth();
+    const [Auth, SetAuth] = useState(null);
+    const handleLogout = () => {
+        logoutUser();
+        navigate('/');
+    }
 
+    useEffect(() => {
+
+    })
     const [showSubMenu, setShowSubMenu] = useState(false);
     const menuRef = useRef(null);
-
+    const navigate = useNavigate();
     const toggleSubMenu = () => {
         setShowSubMenu(!showSubMenu);
     };
@@ -35,25 +47,25 @@ const NavBar = ({ auth, img, username, email }) => {
     }, [menuRef]);
     return (
         <>
-            <header className="flex justify-between items-center p-6">
+            <header className=" sticky z-20 flex justify-between items-center p-6 backdrop-blur-sm">
                 <div className="flex items-center space-x-2">
                     <img className="w-10 h-10 rounded-full" src={logo} alt="logo" />
                     <span className="text-2xl font-bold text-primary">ZenEd</span>
                 </div>
-                <nav className="hidden md:flex justify-between items-center space-x-8 font-nunito">
+                <nav className="hidden sticky md:flex justify-between items-center space-x-8 font-nunito">
                     <div className="flex gap-5 justify-around">
 
                         <NavLink to="/" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Home</NavLink>
-                        {/* <NavLink to="/courses" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Courses</NavLink> */}
+                        <NavLink to="/courses" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Courses</NavLink>
                         <NavLink to="/pricing" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Pricing</NavLink>
                         <NavLink to="/mentors" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Mentors</NavLink>
                         <NavLink to="/contact" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Contact us</NavLink>
-                        {auth ? <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Dashboard</NavLink>
+                        {user ? <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'text-primary' : 'text-link font-poppins  hover:text-primary'} href="#">Dashboard</NavLink>
                             : ''}
                     </div>
                     <div className="">
                         {
-                            auth ?
+                            user ?
                                 <div ref={menuRef} className="avatar flex flex-col start-2 relative">
                                     <div
                                         className="flex flex-row gap-2 cursor-pointer items-center"
@@ -65,7 +77,7 @@ const NavBar = ({ auth, img, username, email }) => {
                                             className="bg-cover inline-block size-8 rounded-full ring-2 ring-white outline -outline-offset-1 outline-black/5"
                                         />
                                         <div className="flex flex-col">
-                                            <p className="text-text font-nunito">{username}</p>
+                                            <p className="text-text font-nunito">{user.name}</p>
                                         </div>
                                         <svg
                                             className={`w-4 h-4 ml-1 transition-transform duration-300 ${showSubMenu ? 'rotate-180' : ''}`}
@@ -82,8 +94,8 @@ const NavBar = ({ auth, img, username, email }) => {
                                     >
                                         <div className="px-2 text-center">
 
-                                            <p className="text-text font-semibold">{username}</p>
-                                            <p className="text-text text-sm text-gray-500">{email}</p>
+                                            <p className="text-text font-semibold">{user.name}</p>
+                                            <p className="text-text text-sm text-gray-500">{user.email}</p>
                                         </div>
                                         <hr className="my-2" />
                                         <ul className=" mt-2">
@@ -96,7 +108,7 @@ const NavBar = ({ auth, img, username, email }) => {
                                                 <FiChevronRight className="ml-auto" />
                                             </li>
                                             <li className="hover:bg-gray-100 p-2 rounded-md transition-colors cursor-pointer flex items-center text-red-500">
-                                                <span>Logout</span>
+                                                <span onClick={() => handleLogout()}>Logout</span>
                                                 <FiChevronRight className="ml-auto" />
                                             </li>
                                         </ul>

@@ -10,6 +10,9 @@ module.exports = {
             .then((client) => {
                 // Choose the learning_platform database
                 dbConnection = client.db(process.env.MONGODB_DB);
+                console.log('====================================');
+                console.log("Connection successful");
+                console.log('====================================');
                 return cb();
             })
             .catch(err => {

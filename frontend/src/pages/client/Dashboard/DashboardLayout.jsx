@@ -4,6 +4,7 @@ import { SidebarContext } from "../../../utils/SidebarContext";
 import Profile from "../../../assets/Testmonial1.png";
 import "../Dashboard/Dashboard.css"
 import { DashBoardIcons } from './DashBoardIcons.jsx';
+
 import GraphicEqIcon from '@mui/icons-material/GraphicEq';
 import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
 import { useAuth } from "../../../utils/AuthContext.jsx";
@@ -98,7 +99,7 @@ const DashboardLayout = () => {
                             }`
                         }
                     >
-                        <HomeOutlinedIcon fontSize="small" className="mr-2" />
+                        <DashboardIcon fontSize="small" className="mr-2" />
                         {!isCollapsed && <span className="text-sm">Dashboard</span>}
                     </NavLink>
 
@@ -181,7 +182,18 @@ const DashboardLayout = () => {
                         <NotificationsNoneOutlinedIcon fontSize="small" className="mr-2" />
                         {!isCollapsed && <span className="text-sm">Notification</span>}
                     </NavLink>
-
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            `px-4 py-2 rounded-lg flex items-center transition-colors duration-200 ${isActive
+                                ? 'bg-primary text-white'
+                                : 'hover:bg-primary hover:text-white'
+                            }`
+                        }
+                    >
+                        <HomeOutlinedIcon fontSize="small" className="mr-2" />
+                        {!isCollapsed && <span className="text-sm">Back To Portal</span>}
+                    </NavLink>
                     <NavLink
                         to="/dashboard/invoices"
                         className={({ isActive }) =>

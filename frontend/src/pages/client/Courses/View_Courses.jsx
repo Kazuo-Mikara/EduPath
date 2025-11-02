@@ -46,7 +46,7 @@ export default function ViewCourses() {
             )}
 
             {!isLoading && Course && (
-                <div className="bg-white rounded-lg shadow p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white rounded-lg shadow p-6 flex flex-col gap-6">
                     <div className="md:col-span-1 flex items-start">
                         <img
                             src={Course.image || Course.thumbnail || sample_image}

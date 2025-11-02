@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import coursesData from '../../../../data/db.json';
 import { APIFetch } from '../../../service/API_fetch';
 import { FaStar } from 'react-icons/fa';
 import sample_image from "../../../assets/sample.jpg";
 import { SidebarContext } from '../../../utils/SidebarContext';
 import Pagination from '../Components/Pagination';
-import { NavLink } from 'react-router';
+import { NavLink } from 'react-router-dom';
 const CourseLists = () => {
     const [courses, setCourses] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -34,13 +33,7 @@ const CourseLists = () => {
         e.target.src = sample_image;
     };
 
-    // Format numbers for display (e.g., 1000 -> 1K)
-    const formatNumber = (num) => {
-        return new Intl.NumberFormat('en-US', {
-            notation: 'compact',
-            maximumFractionDigits: 1
-        }).format(num);
-    };
+    // (formatNumber removed because not used)
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -101,7 +94,7 @@ const CourseLists = () => {
 
                                     }
                                 </div>
-                                <NavLink to={`view_course/${course._id}`} className="mt-2 bg-black hover:bg-primary hover:text-white text-white py-1 px-3 text-xs rounded-md transition-colors">
+                                <NavLink to={`/dashboard/courses/view_course/${course._id}`} className="mt-2 bg-black hover:bg-primary hover:text-white text-white py-1 px-3 text-xs rounded-md transition-colors">
                                     View Course
                                 </NavLink>
                             </div>
